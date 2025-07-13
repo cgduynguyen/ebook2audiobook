@@ -9,7 +9,8 @@ TTS_ENGINES = {
     "VITS": "vits", 
     "FAIRSEQ": "fairseq", 
     "TACOTRON2": "tacotron", 
-    "YOURTTS": "yourtts"
+    "YOURTTS": "yourtts",
+    "EDGE": "edge"
 }
 
 default_tts_engine = TTS_ENGINES['XTTSv2']
@@ -146,6 +147,20 @@ default_engine_settings = {
         "files": ['config.json', 'model_file.pth'],
         "voices": {"Machinella-5": "female-en-5", "ElectroMale-2": "male-en-2", 'Machinella-4': 'female-pt-4\n', 'ElectroMale-3': 'male-pt-3\n'},
         "rating": {"GPU VRAM": 1, "CPU": 5, "RAM": 4, "Realism": 1}
+    },
+    TTS_ENGINES['EDGE']: {
+        "samplerate": 24000,
+        "files": [],
+        "voices": {
+            # Vietnamese voices
+            "vi-VN-HoaiMyNeural": "Hoai My (Female)", 
+            "vi-VN-NamMinhNeural": "Nam Minh (Male)",
+            # English voices
+            "en-US-AriaNeural": "Aria (Female)",
+            "en-US-GuyNeural": "Guy (Male)",
+            "en-US-JennyNeural": "Jenny (Female)"
+        },
+        "rating": {"GPU VRAM": 0, "CPU": 2, "RAM": 1, "Realism": 4}
     }
 }
 models = {
@@ -465,6 +480,16 @@ models = {
             "voice": None,
             "files": default_engine_settings[TTS_ENGINES['YOURTTS']]['files'],
             "samplerate": default_engine_settings[TTS_ENGINES['YOURTTS']]['samplerate']
+        }
+    },
+    TTS_ENGINES['EDGE']: {
+        "internal": {
+            "lang": "multi",
+            "repo": "",
+            "sub": "",
+            "voice": "vi-VN-HoaiMyNeural",
+            "files": default_engine_settings[TTS_ENGINES['EDGE']]['files'],
+            "samplerate": default_engine_settings[TTS_ENGINES['EDGE']]['samplerate']
         }
     }
 }

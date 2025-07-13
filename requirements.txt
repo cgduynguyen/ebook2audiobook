@@ -5,6 +5,7 @@ deep_translator
 demucs
 docker
 ebooklib
+edge-tts
 fastapi
 fugashi
 gradio

@@ -10,13 +10,22 @@ class TTSManager:
  
     def _build(self):
         if self.session['tts_engine'] in TTS_ENGINES.values():
-            from lib.classes.tts_engines.coqui import Coqui
-            self.tts = Coqui(self.session)
-            if self.tts:
-                return True
+            if self.session['tts_engine'] == TTS_ENGINES['EDGE']:
+                from lib.classes.tts_engines.edge_tts import EdgeTTS
+                self.tts = EdgeTTS(self.session)
+                if self.tts:
+                    return True
+                else:
+                    error = 'Edge TTS engine could not be created!'
+                    print(error)
             else:
-                error = 'TTS engine could not be created!'
-                print(error)
+                from lib.classes.tts_engines.coqui import Coqui
+                self.tts = Coqui(self.session)
+                if self.tts:
+                    return True
+                else:
+                    error = 'TTS engine could not be created!'
+                    print(error)
         else:
             print('Other TTS engines coming soon!')
         return False
